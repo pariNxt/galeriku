@@ -93,10 +93,10 @@
     <button onclick="nextFoto()">Next</button>
   </div>
 
-  <!-- Musik autoplay -->
-  <audio autoplay loop>
+  <!-- Musik autoplay universal -->
+  <audio id="bg-music" autoplay loop playsinline muted>
     <source src="https://files.catbox.moe/wutu5n.mp3" type="audio/mpeg">
-    Browser kamu tidak mendukung pemutar audio.
+    Browser kamu tidak mendukung audio.
   </audio>
 
   <script>
@@ -118,6 +118,17 @@
       current = (current - 1 + images.length) % images.length;
       showFoto(current);
     }
+
+    // Musik autoplay handling
+    const audio = document.getElementById("bg-music");
+    audio.muted = false;
+
+    document.body.addEventListener("click", () => {
+      if (audio.paused) {
+        audio.muted = false;
+        audio.play();
+      }
+    }, { once: true });
   </script>
 
 </body>
